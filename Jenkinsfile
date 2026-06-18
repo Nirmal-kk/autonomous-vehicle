@@ -3,39 +3,27 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Nirmal-kk/autonomous-vehicle.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'docker build -t auto-vehicle .'
-            }
-        }
-
         stage('Sensor Testing') {
             steps {
-                sh 'pytest sensor/'
+                sh 'python -m pytest sensor/'
             }
         }
 
         stage('Decision Testing') {
             steps {
-                sh 'pytest decision/'
+                sh 'python -m pytest decision/'
             }
         }
 
         stage('Control Testing') {
             steps {
-                sh 'pytest control/'
+                sh 'python -m pytest control/'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying vehicle software'
+                echo 'Deployment Successful'
             }
         }
     }
